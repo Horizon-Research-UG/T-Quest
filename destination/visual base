@@ -1,0 +1,23 @@
+die visual_base.py soll die Basis und das Grundfenster 
+von TimeQuest sein
+
+wichtig: der Code soll auch Easy über GithubPages und über
+ein einfaches exen Programm auf einem USB Stick laufen
+
+---
+
+
+
+
+Ticket 1: erstelle ein Fenster aus der Zukunft beeindruckend 
+durch einfach edels minimalistisch überraschend intuitiv ansprechendes Design
+mit einem entsprechenden Botton in der Mitte "Quest"
+
+Wenn man auf Quest drückt -> print in Terminal:
+"How mutch Time you wanna offer?"
+
+-> bitte das Programm in eine datei "quest_rahmen.py"
+
+bitte keine anderen Dateien bearbeiten
+
+lies vorher "how to code.txt"
