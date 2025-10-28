@@ -5,7 +5,7 @@ import random  # für Zufallswerte beim Flimmern (Zeile 8-14, 16-22)
 def create_window():  # erstellt das Hauptfenster (Zeile 24-30)
     root = tk.Tk()  # neues Fenster objekt (verwendet in Zeile 6,7)
     root.title("T-Quest v2")  # Fenstertitel setzen (sichtbar in Titelleiste)
-    root.geometry("600x400")  # Fenstergröße futuristisch (verwendet in Zeile 24)
+    root.geometry("1200x800")  # Fenstergröße futuristisch (verwendet in Zeile 24)
     root.configure(bg="#0a0a0a")  # start schwarzer Hintergrund (Zeile 8)
     return root  # Fenster zurückgeben für weitere Nutzung (Zeile 32)
 
@@ -13,7 +13,7 @@ def flicker_background(root):  # Hintergrund flimmern lassen (Zeile 3,32)
     colors = ["#0a0a0a", "#1a1a1a", "#2a2a2a", "#0f0f0f", "#050505"]  # grau-schwarz Palette
     bg_color = random.choice(colors)  # zufällige Farbe auswählen (Zeile 3)
     root.configure(bg=bg_color)  # Hintergrund ändern (verwendet in Zeile 7)
-    flicker_time = random.randint(100, 500)  # zufällige Flimmer-Geschwindigkeit (Zeile 3)
+    flicker_time = random.randint(100, 300)  # zufällige Flimmer-Geschwindigkeit (Zeile 3)
     root.after(flicker_time, lambda: flicker_background(root))  # rekursiver Aufruf (Zeile 8)
 
 def style_button():  # Button-Design futuristisch gestalten (Zeile 24-30)
@@ -33,10 +33,8 @@ def flicker_button_text(button):  # Button Text flackern wie kaputte Lampe (Zeil
 
 def quest_click():  # Funktion für Button-Klick (verwendet in Zeile 32)
     print("How mutch Time you wanna offer?")  # Terminal-Ausgabe wie gewünscht
-    import thanks
-    thanks.main()
-    import mission_control
-    mission_control.main()
+    import ebene_1.mission_control
+    ebene_1.mission_control.main()
 
 def create_quest_button(parent, style):  # Quest Button erstellen (Zeile 5,18,23)
     button = ttk.Button(parent, text="Quest", style="Future.TButton")  # Button mit Style (Zeile 18,23)

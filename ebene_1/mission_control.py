@@ -1,7 +1,7 @@
 
 def read_and_print():
-    with open (r"C:\Users\49176\OneDrive - Heiner Reinecke\Mit PC verknüpft\Desktop\NeuroGames - nicht verschieben\t1\T-Quest\y - datenbank\offen", "r") as a:
-        x = a.readlines()
+    with open ("y - datenbank/offen", "r") as a:
+        x = a.read().strip()  # read() statt readlines() + strip() entfernt \n
         print(x)
 
 def main():
