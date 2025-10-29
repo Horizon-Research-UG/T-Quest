@@ -1,0 +1,52 @@
+import os  # System-Zugriff (verwendet Zeile 18, 32)
+import sys  # Python-System (verwendet Zeile 23, 45)
+from pathlib import Path  # moderne Pfade (verwendet Zeile 13, 28)
+
+def get_base_path():  # Basis-Pfad ermitteln (verwendet überall)
+    if getattr(sys, 'frozen', False):  # exe-Modus (USB-Stick)
+        return Path(sys.executable).parent  # exe-Verzeichnis (Portable)
+    return Path(__file__).parent  # Python-Modus (Development)
+
+def get_resource_path(relative_path):  # Ressource-Pfad (verwendet überall)
+    base = get_base_path()  # Basis-Pfad (Zeile 8)
+    full_path = base / relative_path  # vollständiger Pfad (Kombination)
+    return str(full_path)  # String-Pfad (Kompatibilität)
+
+def ensure_directory(path):  # Verzeichnis sicherstellen (verwendet bei Bedarf)
+    Path(path).mkdir(parents=True, exist_ok=True)  # Verzeichnis erstellen (rekursiv)
+
+def is_portable_mode():  # Portable-Modus prüfen (verwendet für Anpassungen)
+    return getattr(sys, 'frozen', False)  # exe-Check (Boolean)
+
+def get_config_path():  # Konfigurations-Pfad (verwendet für Settings)
+    base = get_base_path()  # Basis-Pfad (Zeile 8)
+    config_dir = base / "config"  # Config-Verzeichnis (Struktur)
+    ensure_directory(config_dir)  # Verzeichnis erstellen (Zeile 18)
+    return config_dir / "timequest.ini"  # Config-Datei (INI-Format)
+
+def get_data_path():  # Daten-Pfad (verwendet für Speicherung)
+    base = get_base_path()  # Basis-Pfad (Zeile 8)
+    data_dir = base / "data"  # Daten-Verzeichnis (Struktur)
+    ensure_directory(data_dir)  # Verzeichnis erstellen (Zeile 18)
+    return data_dir  # Verzeichnis-Pfad (Return)
+
+def create_portable_structure():  # Portable-Struktur (USB-Vorbereitung)
+    base = get_base_path()  # Basis-Pfad (Zeile 8)
+    directories = ["config", "data", "plugins", "games"]  # Verzeichnis-Liste (Struktur)
+    for dir_name in directories:  # alle Verzeichnisse (Loop)
+        ensure_directory(base / dir_name)  # Verzeichnis erstellen (Zeile 18)
+
+def get_github_pages_config():  # GitHub Pages Konfiguration (Web-Modus)
+    return {  # Config-Dictionary (Web-Anpassungen)
+        "use_web_storage": True,  # Browser-Storage (Web-Persistenz)
+        "disable_file_operations": True,  # Datei-Ops deaktiviert (Web-Sicherheit)
+        "use_cdn_resources": True,  # CDN für Ressourcen (Performance)
+        "minimal_ui": True  # minimale UI (Web-Optimierung)
+    }  # Return-Dictionary (Configuration)
+
+def setup_environment():  # Umgebung einrichten (Startup-Funktion)
+    if is_portable_mode():  # Portable-Modus (USB-Stick)
+        create_portable_structure()  # Struktur erstellen (Zeile 32)
+        print("Portable-Modus aktiviert")  # Status-Info (Debug)
+    else:  # Development-Modus (Standard)
+        print("Development-Modus")  # Status-Info (Debug)
